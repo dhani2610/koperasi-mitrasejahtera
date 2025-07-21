@@ -37,13 +37,27 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'spip'], function () {
         Route::get('/', 'Backend\SpipController@index')->name('spip');
-        Route::get('send-reminder/{id}', 'Backend\SpipController@sendEmail')->name('spip.mail.reminder');
         Route::get('create', 'Backend\SpipController@create')->name('spip.create');
         Route::post('store', 'Backend\SpipController@store')->name('spip.store');
         Route::get('edit/{id}', 'Backend\SpipController@edit')->name('spip.edit');
         Route::post('update/{id}', 'Backend\SpipController@update')->name('spip.update');
         Route::get('destroy/{id}', 'Backend\SpipController@destroy')->name('spip.destroy');
     });
+
+    Route::group(['prefix' => 'anggota'], function () {
+        Route::get('/', 'Backend\AnggotaController@index')->name('anggota');
+        Route::post('store', 'Backend\AnggotaController@store')->name('anggota.store');
+        Route::post('update/{id}', 'Backend\AnggotaController@update')->name('anggota.update');
+        Route::get('destroy/{id}', 'Backend\AnggotaController@destroy')->name('anggota.destroy');
+    });
+
+    Route::prefix('jenis-angsuran')->group(function () {
+        Route::get('/', 'Backend\JenisAngsuranController@index')->name('jenis-angsuran');
+        Route::post('/store', 'Backend\JenisAngsuranController@store')->name('jenis-angsuran.store');
+        Route::post('/update/{id}', 'Backend\JenisAngsuranController@update')->name('jenis-angsuran.update');
+        Route::get('/destroy/{id}', 'Backend\JenisAngsuranController@destroy')->name('jenis-angsuran.destroy');
+    });
+
 
     // Login Routes
     Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');
